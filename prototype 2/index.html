@@ -4,19 +4,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>What's best for your organization?</title>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Fraunces:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
 <header>
-  <h1>What's best for your organization?</h1>
+  <div class="header-inner">
+    <div class="header-eyebrow">Storage Decision Support System · USJ-R Research Prototype · Aledon, Ballares &amp; Ronde (2026)</div>
+    <h1>What's best for your<br><em>organization?</em></h1>
+    <p>Answer the profile questions to receive a research-based cloud vs. on-premise storage recommendation.</p>
+  </div>
 </header>
 
 <div class="main">
 
   <!-- LEFT: Input form -->
-  <div>
+  <aside class="form-col">
     <div class="panel">
       <div class="panel-title">Organization Profile</div>
 
@@ -35,7 +39,7 @@
       </div>
 
       <div class="field">
-        <label>Internet upload speed <span>(Mbps — your actual connection)</span></label>
+        <label>Internet upload speed <span>(Mbps — actual connection)</span></label>
         <div class="slider-row">
           <input type="range" id="upload-speed" min="1" max="500" value="20" step="1">
           <span class="slider-val" id="upload-val">20 Mbps</span>
@@ -61,6 +65,8 @@
           </select>
         </div>
       </div>
+
+      <div class="divider"></div>
 
       <div class="field">
         <label>Data sensitivity level</label>
@@ -98,6 +104,8 @@
         </div>
       </div>
 
+      <div class="divider"></div>
+
       <div class="field">
         <label>Budget for infrastructure</label>
         <div class="select-wrap">
@@ -118,15 +126,22 @@
         </div>
       </div>
 
-      <button class="btn-analyze" onclick="analyze()">ANALYZE →</button>
+      <button class="btn-analyze" onclick="analyze()">
+        <span>Analyze profile</span>
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M2 7H12M12 7L8 3M12 7L8 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
     </div>
-  </div>
+  </aside>
 
   <!-- RIGHT: Results -->
   <div class="result-col">
     <div class="placeholder-panel" id="placeholder">
-      <span class="big">→</span>
-      Fill in your organization profile<br>and click Analyze to receive a<br>research-based recommendation.
+      <div class="placeholder-inner">
+        <div class="placeholder-arrow">→</div>
+        <div class="placeholder-text">Fill in your organization profile<br>and click <em>Analyze profile</em> to receive<br>a research-based recommendation.</div>
+      </div>
     </div>
 
     <div class="result-panel" id="result-panel">
@@ -139,7 +154,10 @@
       </div>
 
       <!-- Score bars -->
-      <div class="score-grid" id="score-grid"></div>
+      <div class="score-section">
+        <div class="score-section-label">Comparative scores — your profile</div>
+        <div class="score-grid" id="score-grid"></div>
+      </div>
 
       <!-- Privacy & Security findings table -->
       <div class="sec-section">
