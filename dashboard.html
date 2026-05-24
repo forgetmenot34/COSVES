@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <nav>
+        <h2>COSVES Dashboard</h2>
+
+        <ul>
+            <li><a href="findings.html">Findings</a></li>
+            <li><a href="comparison.html">Comparison</a></li>
+            <li><a href="recommendation.html">Recommendation</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+
+        <div class="cards">
+
+            <div class="card">
+                <h3>Cloud Upload</h3>
+                <p>41 sec</p>
+            </div>
+
+            <div class="card">
+                <h3>On-Premise Upload</h3>
+                <p>1.50 sec</p>
+            </div>
+
+            <div class="card">
+                <h3>Privacy Risk</h3>
+                <p>Medium</p>
+            </div>
+
+            <div class="card">
+                <h3>Security Rating</h3>
+                <p>High</p>
+            </div>
+
+        </div>
+
+        <div class="chart-container">
+            <canvas id="dashboardChart"></canvas>
+        </div>
+
+    </div>
+
+    <script src="data/results.js"></script>
+    <script src="js/charts.js"></script>
+
+</body>
+</html>
