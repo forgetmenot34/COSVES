@@ -1,227 +1,272 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>What's best for your organization?</title>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Fraunces:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Storage Decision Support System</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@300;400;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
 
-<header>
-  <h1>What's best for your organization?</h1>
-</header>
+  <header>
+    <div class="header-content">
+      <h1>
+        What's Best For Your Organization?
+      </h1>
 
-<div class="main">
-
-  <!-- LEFT: Input form -->
-  <div>
-    <div class="panel">
-      <div class="panel-title">Organization Profile</div>
-
-      <div class="field">
-        <label>Organization type</label>
-        <div class="select-wrap">
-          <select id="org-type">
-            <option value="small">Small business / startup</option>
-            <option value="mid">Mid-size organization</option>
-            <option value="enterprise">Large enterprise</option>
-            <option value="healthcare">Healthcare / clinic</option>
-            <option value="academic">Academic / research</option>
-            <option value="gov">Government / public sector</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="field">
-        <label>Internet upload speed <span>(Mbps — your actual connection)</span></label>
-        <div class="slider-row">
-          <input type="range" id="upload-speed" min="1" max="500" value="20" step="1">
-          <span class="slider-val" id="upload-val">20 Mbps</span>
-        </div>
-      </div>
-
-      <div class="field">
-        <label>Internet download speed <span>(Mbps)</span></label>
-        <div class="slider-row">
-          <input type="range" id="download-speed" min="1" max="1000" value="50" step="1">
-          <span class="slider-val" id="download-val">50 Mbps</span>
-        </div>
-      </div>
-
-      <div class="field">
-        <label>Typical file size transferred <span>(daily operations)</span></label>
-        <div class="select-wrap">
-          <select id="file-size">
-            <option value="small">Small (&lt; 50 MB)</option>
-            <option value="medium" selected>Medium (50 – 500 MB)</option>
-            <option value="large">Large (500 MB – 5 GB)</option>
-            <option value="xlarge">Very large (&gt; 5 GB)</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="field">
-        <label>Data sensitivity level</label>
-        <div class="toggle-group" id="sensitivity">
-          <div class="toggle-opt" data-val="low">Low</div>
-          <div class="toggle-opt active" data-val="medium">Medium</div>
-          <div class="toggle-opt" data-val="high">High</div>
-          <div class="toggle-opt" data-val="critical">Critical</div>
-        </div>
-      </div>
-
-      <div class="field">
-        <label>Remote / distributed team access needed?</label>
-        <div class="toggle-group" id="remote-access">
-          <div class="toggle-opt active" data-val="yes">Yes</div>
-          <div class="toggle-opt" data-val="no">No — local only</div>
-        </div>
-      </div>
-
-      <div class="field">
-        <label>IT staff available on-site?</label>
-        <div class="toggle-group" id="it-staff">
-          <div class="toggle-opt" data-val="none">None</div>
-          <div class="toggle-opt active" data-val="limited">Limited</div>
-          <div class="toggle-opt" data-val="full">Full team</div>
-        </div>
-      </div>
-
-      <div class="field">
-        <label>Files shared externally (outside org)?</label>
-        <div class="toggle-group" id="external-share">
-          <div class="toggle-opt active" data-val="often">Often</div>
-          <div class="toggle-opt" data-val="sometimes">Sometimes</div>
-          <div class="toggle-opt" data-val="never">Never</div>
-        </div>
-      </div>
-
-      <div class="field">
-        <label>Budget for infrastructure</label>
-        <div class="select-wrap">
-          <select id="budget">
-            <option value="minimal">Minimal — prefer low upfront cost</option>
-            <option value="moderate" selected>Moderate — some capital available</option>
-            <option value="high">High — willing to invest</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="field">
-        <label>Compliance / regulatory requirements</label>
-        <div class="toggle-group" id="compliance">
-          <div class="toggle-opt active" data-val="none">None</div>
-          <div class="toggle-opt" data-val="moderate">Moderate</div>
-          <div class="toggle-opt" data-val="strict">Strict (HIPAA, GDPR…)</div>
-        </div>
-      </div>
-
-      <button class="btn-analyze" onclick="analyze()">ANALYZE →</button>
+      <p>
+        Analyze whether cloud storage, on-premise servers,
+        or a hybrid architecture best fits your operational,
+        privacy, compliance, and performance needs.
+      </p>
     </div>
-  </div>
+  </header>
 
-  <!-- RIGHT: Results -->
-  <div class="result-col">
-    <div class="placeholder-panel" id="placeholder">
-      <span class="big">→</span>
-      Fill in your organization profile<br>and click Analyze to receive a<br>research-based recommendation.
-    </div>
+  <main class="main">
 
-    <div class="result-panel" id="result-panel">
+    <!-- LEFT SIDE -->
+    <aside class="left-col">
+      <div class="panel">
 
-      <!-- Recommendation header -->
-      <div class="result-header">
-        <div class="rec-label">Recommendation</div>
-        <div id="result-badge" class="result-badge"></div>
-        <div id="result-summary" class="result-summary"></div>
-      </div>
+        <div class="panel-title">
+          Organization Profile
+        </div>
 
-      <!-- Score bars -->
-      <div class="score-grid" id="score-grid"></div>
+        <!-- Organization -->
+        <div class="field">
+          <label>Organization type</label>
 
-      <!-- Privacy & Security findings table -->
-      <div class="sec-section">
-        <div class="sec-title">Privacy &amp; Security Test Results — Research Findings (Aledon et al., 2026)</div>
-        <div class="sec-grid">
-          <div class="sec-row header-row">
-            <span>Security criterion</span>
-            <span>Cloud (G-Drive)</span>
-            <span>On-Premise</span>
-          </div>
-          <div class="sec-row">
-            <div class="sec-criterion">Authentication required</div>
-            <div class="sec-pill pill-pass">✓ Yes</div>
-            <div class="sec-pill pill-pass">✓ Yes</div>
-          </div>
-          <div class="sec-row">
-            <div class="sec-criterion">Incorrect credentials blocked</div>
-            <div class="sec-pill pill-pass">✓ Yes</div>
-            <div class="sec-pill pill-pass">✓ Yes</div>
-          </div>
-          <div class="sec-row">
-            <div class="sec-criterion">Unauthorized access blocked</div>
-            <div class="sec-pill pill-pass">✓ Yes</div>
-            <div class="sec-pill pill-pass">✓ Yes</div>
-          </div>
-          <div class="sec-row">
-            <div class="sec-criterion">Access control enforcement</div>
-            <div class="sec-pill pill-pass">✓ Enforced</div>
-            <div class="sec-pill pill-pass">✓ Enforced</div>
-          </div>
-          <div class="sec-row">
-            <div class="sec-criterion">Permission changes applied</div>
-            <div class="sec-pill pill-pass">✓ Yes</div>
-            <div class="sec-pill pill-pass">✓ Yes</div>
-          </div>
-          <div class="sec-row">
-            <div class="sec-criterion">Access blocked after revocation</div>
-            <div class="sec-pill pill-pass">✓ Yes</div>
-            <div class="sec-pill pill-pass">✓ Yes</div>
-          </div>
-          <div class="sec-row">
-            <div class="sec-criterion">Delay before revocation applied</div>
-            <div class="sec-pill pill-warn">⚠ Yes — delay</div>
-            <div class="sec-pill pill-pass">✓ Instant</div>
-          </div>
-          <div class="sec-row">
-            <div class="sec-criterion">Publicly accessible via link</div>
-            <div class="sec-pill pill-fail">✗ Possible</div>
-            <div class="sec-pill pill-pass">✓ No</div>
-          </div>
-          <div class="sec-row">
-            <div class="sec-criterion">Login bypass possible</div>
-            <div class="sec-pill pill-pass">✓ No</div>
-            <div class="sec-pill pill-pass">✓ No</div>
-          </div>
-          <div class="sec-row">
-            <div class="sec-criterion">Deleted file recovery</div>
-            <div class="sec-pill pill-fail">✗ Failed</div>
-            <div class="sec-pill pill-pass">✓ Successful</div>
+          <div class="select-wrap">
+            <select id="org-type">
+              <option value="small">Small business / startup</option>
+              <option value="mid">Mid-size organization</option>
+              <option value="enterprise">Large enterprise</option>
+              <option value="healthcare">Healthcare / clinic</option>
+              <option value="academic">Academic / research</option>
+              <option value="gov">Government / public sector</option>
+            </select>
           </div>
         </div>
-        <div class="sec-note" id="sec-note-text"></div>
+
+        <!-- Upload -->
+        <div class="field">
+          <label>
+            Internet upload speed
+            <span>(Mbps)</span>
+          </label>
+
+          <div class="slider-row">
+            <input
+              type="range"
+              id="upload-speed"
+              min="1"
+              max="500"
+              value="20"
+            />
+
+            <span class="slider-val" id="upload-val">
+              20 Mbps
+            </span>
+          </div>
+        </div>
+
+        <!-- Download -->
+        <div class="field">
+          <label>
+            Internet download speed
+            <span>(Mbps)</span>
+          </label>
+
+          <div class="slider-row">
+            <input
+              type="range"
+              id="download-speed"
+              min="1"
+              max="1000"
+              value="50"
+            />
+
+            <span class="slider-val" id="download-val">
+              50 Mbps
+            </span>
+          </div>
+        </div>
+
+        <!-- File Size -->
+        <div class="field">
+          <label>Typical file size transferred</label>
+
+          <div class="select-wrap">
+            <select id="file-size">
+              <option value="small">Small (&lt; 50 MB)</option>
+              <option value="medium" selected>Medium (50 – 500 MB)</option>
+              <option value="large">Large (500 MB – 5 GB)</option>
+              <option value="xlarge">Very large (&gt; 5 GB)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Sensitivity -->
+        <div class="field">
+          <label>Data sensitivity level</label>
+
+          <div class="toggle-group" id="sensitivity">
+            <div class="toggle-opt" data-val="low">Low</div>
+            <div class="toggle-opt active" data-val="medium">Medium</div>
+            <div class="toggle-opt" data-val="high">High</div>
+            <div class="toggle-opt" data-val="critical">Critical</div>
+          </div>
+        </div>
+
+        <!-- Remote -->
+        <div class="field">
+          <label>Remote / distributed access needed?</label>
+
+          <div class="toggle-group" id="remote-access">
+            <div class="toggle-opt active" data-val="yes">Yes</div>
+            <div class="toggle-opt" data-val="no">No</div>
+          </div>
+        </div>
+
+        <!-- IT Staff -->
+        <div class="field">
+          <label>IT staff available?</label>
+
+          <div class="toggle-group" id="it-staff">
+            <div class="toggle-opt" data-val="none">None</div>
+            <div class="toggle-opt active" data-val="limited">Limited</div>
+            <div class="toggle-opt" data-val="full">Full team</div>
+          </div>
+        </div>
+
+        <!-- External -->
+        <div class="field">
+          <label>Files shared externally?</label>
+
+          <div class="toggle-group" id="external-share">
+            <div class="toggle-opt active" data-val="often">Often</div>
+            <div class="toggle-opt" data-val="sometimes">Sometimes</div>
+            <div class="toggle-opt" data-val="never">Never</div>
+          </div>
+        </div>
+
+        <!-- Budget -->
+        <div class="field">
+          <label>Infrastructure budget</label>
+
+          <div class="select-wrap">
+            <select id="budget">
+              <option value="minimal">Minimal</option>
+              <option value="moderate" selected>Moderate</option>
+              <option value="high">High</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Compliance -->
+        <div class="field">
+          <label>Compliance requirements</label>
+
+          <div class="toggle-group" id="compliance">
+            <div class="toggle-opt active" data-val="none">None</div>
+            <div class="toggle-opt" data-val="moderate">Moderate</div>
+            <div class="toggle-opt" data-val="strict">Strict</div>
+          </div>
+        </div>
+
+        <button class="btn-analyze" onclick="analyze()">
+          Analyze Infrastructure →
+        </button>
+
+      </div>
+    </aside>
+
+    <!-- RIGHT SIDE -->
+    <section class="result-col">
+
+      <!-- Placeholder -->
+      <div class="placeholder-panel" id="placeholder">
+
+        <div class="placeholder-icon">
+          ↗
+        </div>
+
+        <h2>
+          Ready to Analyze
+        </h2>
+
+        <p>
+          Complete the organization profile and generate a
+          research-based infrastructure recommendation.
+        </p>
+
       </div>
 
-      <!-- Privacy risk analysis -->
-      <div class="risk-section">
-        <div class="risk-title">Privacy Risk Analysis — Based on Your Profile</div>
-        <div id="risk-list"></div>
+      <!-- Results -->
+      <div class="result-panel" id="result-panel">
+
+        <!-- Recommendation -->
+        <div class="result-header">
+
+          <div class="rec-label">
+            Recommendation
+          </div>
+
+          <div id="result-badge" class="result-badge"></div>
+
+          <div id="result-summary" class="result-summary"></div>
+
+        </div>
+
+        <!-- Score Grid -->
+        <div class="score-grid" id="score-grid"></div>
+
+        <!-- Security -->
+        <div class="card-section">
+
+          <div class="section-title">
+            Privacy & Security Findings
+          </div>
+
+          <div class="sec-note" id="sec-note-text"></div>
+
+        </div>
+
+        <!-- Risks -->
+        <div class="card-section">
+
+          <div class="section-title">
+            Privacy Risk Analysis
+          </div>
+
+          <div id="risk-list"></div>
+
+        </div>
+
+        <!-- Findings -->
+        <div class="card-section">
+
+          <div class="section-title">
+            Operational Findings
+          </div>
+
+          <div id="findings-list"></div>
+
+        </div>
+
+        <!-- References -->
+        <div class="ref-note" id="ref-note"></div>
+
       </div>
 
-      <!-- General operational findings -->
-      <div class="findings-list">
-        <div class="f-title">Operational findings for your profile</div>
-        <div id="findings-list"></div>
-      </div>
+    </section>
 
-      <div class="ref-note" id="ref-note"></div>
-    </div>
-  </div>
+  </main>
 
-</div>
-
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
