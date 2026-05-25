@@ -149,16 +149,16 @@ function analyze() {
         <div class="bar-row">
           <span class="bar-tag">Cloud</span>
           <div class="bar-track">
-            <div class="bar-fill" style="width:${s.c}%; background:var(--cloud-mid)"></div>
-          </div>
-          <span class="bar-num">${s.c}</span>
+  <div class="bar-fill" style="width:${s.c}%; background:${s.c >= 75 ? 'linear-gradient(90deg,#0b4650,#1a8060)' : s.c >= 55 ? 'linear-gradient(90deg,#1a7a4a,#27ae60)' : s.c >= 35 ? 'linear-gradient(90deg,#d4a017,#e6c319)' : 'linear-gradient(90deg,#c0392b,#e74c3c)'}"></div>
+</div>
+<span class="bar-num">${s.c}</span>
         </div>
         <div class="bar-row">
           <span class="bar-tag">On-prem</span>
-          <div class="bar-track">
-            <div class="bar-fill" style="width:${s.o}%; background:var(--onprem-mid)"></div>
-          </div>
-          <span class="bar-num">${s.o}</span>
+         <div class="bar-track">
+  <div class="bar-fill" style="width:${s.o}%; background:${s.o >= 75 ? 'linear-gradient(90deg,#0b4650,#1a8060)' : s.o >= 55 ? 'linear-gradient(90deg,#1a7a4a,#27ae60)' : s.o >= 35 ? 'linear-gradient(90deg,#d4a017,#e6c319)' : 'linear-gradient(90deg,#c0392b,#e74c3c)'}"></div>
+</div>
+<span class="bar-num">${s.o}</span>
         </div>
       </div>
       <div class="score-verdict">
